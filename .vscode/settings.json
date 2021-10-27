@@ -1,0 +1,9 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#342C25",
+    "titleBar.activeBackground": "#493E34",
+    "titleBar.activeForeground": "#FCFBFB"
+  },
+  "jestrunner.jestCommand": "npm run test --",
+  "jestrunner.jestPath": "${workspaceRoot}/node_modules/.bin/react-scripts"
+}
