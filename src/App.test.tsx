@@ -10,4 +10,7 @@ test('renders hello world', () => {
   const label = getByTitle("Count Label")
   expect(label).toBeInTheDocument();
 
+  const counter = getByTitle("Current Count");
+  expect(counter).toHaveTextContent("0");
+
 });

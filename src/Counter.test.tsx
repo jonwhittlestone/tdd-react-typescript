@@ -22,3 +22,9 @@ test("should start at zero", () => {
     const counter = getByTitle("Current Count");
     expect(counter).toHaveTextContent("0");
 });
+
+test("should start at another value", () => {
+    const { getByTitle } = render(<Counter start={10} />)
+    const counter = getByTitle("Current Count");
+    expect(counter).toHaveTextContent("10");
+});
