@@ -1,6 +1,7 @@
 
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Counter } from "./Counter";
 
 test("should render a label and counter", () => {
@@ -27,4 +28,20 @@ test("should start at another value", () => {
     const { getByTitle } = render(<Counter start={10} />)
     const counter = getByTitle("Current Count");
     expect(counter).toHaveTextContent("10");
+});
+
+test("should increment the count by one", () => {
+  const { getByTitle } = render(<Counter />);
+  const counter = getByTitle("Current Count");
+  expect(counter).toHaveTextContent("0");
+  fireEvent.click(counter);
+  expect(counter).toHaveTextContent("1");
+});
+
+test("should increment the count by 10", () => {
+  const { getByTitle } = render(<Counter />);
+  const counter = getByTitle("Current Count");
+  expect(counter).toHaveTextContent("0");
+  userEvent.click(counter, { shiftKey: true});
+  expect(counter).toHaveTextContent("10");
 });

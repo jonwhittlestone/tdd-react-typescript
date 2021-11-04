@@ -12,6 +12,18 @@ export type CounterState = Readonly<typeof initialState>;
 // Vid8. use readonly modifier
 export class Counter extends Component<CounterProps, CounterState> {
   readonly state: CounterState = initialState;
+
+    /**
+     * Vid 9: According to event type, add 1 or 10
+     * Takes MouseEvent as parameter and increments by:
+     *  -10 - if shift key is pressed
+     *  -1 - if shift key is not pressed
+     * @param event 
+     */
+    incrementCounter = (event: React.MouseEvent<HTMLElement>) => {
+        const inc: number = event.shiftKey ? 10 : 1;
+        this.setState({ count: this.state.count + inc });
+    };
     componentDidMount() {
         if (this.props.start) {
             this.setState({
@@ -25,7 +37,10 @@ export class Counter extends Component<CounterProps, CounterState> {
     return (
       <div>
         <span title="Count Label">{label}</span>
-        <span id="counter" title="Current Count">
+            <span id="counter"
+                title="Current Count"
+                onClick={this.incrementCounter}
+            >
           {this.state.count}
         </span>
       </div>
