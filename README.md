@@ -1,10 +1,18 @@
 # react-typescript-tdd
 
-Inspired by webstorm guide
+See: [webstorm guide](https://www.jetbrains.com/webstorm/guide/tutorials/react_typescript_tdd/project_setup/)
 
 Learn with video > make own TODOs/notes > article
 
-## Video 8
+The overal principle of TDD this way is to prove through the Jest test in node that the funcionality works. Then firing up a browser to do a visual smoke test.
+
+This is much more zen. No `console.log`s everywhere (-:
+
+---
+
+## Notes
+
+### Video 8
 
 Create failing test for starting at zero, toHaveTextContent() and make it pass for completing implementation.
 
@@ -16,7 +24,7 @@ Create failing test for starting at zero, toHaveTextContent() and make it pass f
 
 - get tests to pass with a lifecycle method in implementation `ComponentDidMount`
 
-## Video 9
+### Video 9
 
 Event handling of the stateful class component, writing tests first using a simulated browser to click to add 1 or shift click to add 10
 
@@ -28,3 +36,15 @@ Event handling of the stateful class component, writing tests first using a simu
 
 - For testing of complex behaviours (shift key) add and use in new test `user-event`
   - https://github.com/testing-library/user-event
+
+### Video 10 [code](https://github.com/JetBrains/jetbrains_guide/tree/main/sites/webstorm-guide/demos/tutorials/react_typescript_tdd/presentation_components/src)
+
+Embracing React pattern of presentational component through refactor
+
+- Move state out of class-based component into functional component and adjust test to adhere to the contract (where `<Counter>` now accepts a `count` prop)
+
+- the handler can be mocked using the "spy" `jest.fn()` and assertions can be made about it. E.g `expect(handler).toBeCalledWith(1)`
+
+- Slim the interface down. To determine if shift is presesd, "override" the handler prop by finding out if shift was pressed first inside the `Counter` handler which can then invoke the handler in the prop. This means information about 'shift true/false` can just be passed back to the parent.
+
+TODO. Update the container: Convert `App` into a class based component where the state is managed that passes into `<Counter />`

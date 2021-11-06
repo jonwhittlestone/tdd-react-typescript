@@ -5,7 +5,8 @@ import userEvent from "@testing-library/user-event";
 import { Counter } from "./Counter";
 
 test("should render a label and counter", () => {
-  const { getByTitle } = render(<Counter />);
+  const handler = jest.fn()
+  const { getByTitle } = render(<Counter count={0} onCounterIncrease={handler} />);
   const label = getByTitle("Count Label");
   expect(label).toBeInTheDocument();
   const count = getByTitle("Current Count");
@@ -13,35 +14,29 @@ test("should render a label and counter", () => {
 });
 
 test("should render a counter with custom label", () => {
-  const { getByTitle } = render(<Counter label={`Current`} />);
+  const handler = jest.fn()
+  const { getByTitle } = render(<Counter label={`Current`} count={0} onCounterIncrease={handler} />);
   const label = getByTitle("Current Count");
   expect(label).toBeInTheDocument();
 });
 
-test("should start at zero", () => {
-    const { getByTitle } = render(<Counter />);
-    const counter = getByTitle("Current Count");
-    expect(counter).toHaveTextContent("0");
-});
 
-test("should start at another value", () => {
-    const { getByTitle } = render(<Counter start={10} />)
-    const counter = getByTitle("Current Count");
-    expect(counter).toHaveTextContent("10");
-});
-
-test("should increment the count by one", () => {
-  const { getByTitle } = render(<Counter />);
+test("should call the incrementer function", () => {
+  const handler = jest.fn();
+  const { getByTitle } = render(
+    <Counter count={0} onCounterIncrease={handler} />
+  );
   const counter = getByTitle("Current Count");
   expect(counter).toHaveTextContent("0");
   fireEvent.click(counter);
-  expect(counter).toHaveTextContent("1");
+  expect(handler).toBeCalledTimes(1);
 });
 
-test("should increment the count by 10", () => {
-  const { getByTitle } = render(<Counter />);
-  const counter = getByTitle("Current Count");
-  expect(counter).toHaveTextContent("0");
-  userEvent.click(counter, { shiftKey: true});
-  expect(counter).toHaveTextContent("10");
-});
+// Vid10. This can be moved to App.test.tsx
+// test("should increment the count by 10", () => {
+//   const { getByTitle } = render(<Counter />);
+//   const counter = getByTitle("Current Count");
+//   expect(counter).toHaveTextContent("0");
+//   userEvent.click(counter, { shiftKey: true});
+//   expect(counter).toHaveTextContent("10");
+// });
