@@ -6,12 +6,40 @@ https://github.com/PacktPublishing/Full-Stack-React-TypeScript-and-Node/tree/mas
 
 ## Why are class-based components not good enough?
 
-- Does not provide good code reuse
+- Does not provide good code reuse.
+
+  - We cannot easily extract out or share logic from a lifecycle event method and then reuse it in some other class component since it's a class than relies on class inheritance.
+
 - In `setState()`, State changing does not happen immediately as it's controlled by the React system
+
 - setState() in a component with a render method is not performant. It's more preferable to share the state of a component using props - state properties that have been passed down to a child component. When state changes, rather than rerender the entire UI, a reconciliation process determines that just what is needed will change.
+
 - Lifecycle methods are complicated.
 
-## What are the benefits of React Hooks?
+## What are hooks, and why are they better than class-based?
+
+- React hooks are used in functional components. This means they are more flexible as they don't need to be used in a certain way/in a certain component.
+
+- Rather than receiving functionality as an inheritance from some parent class, we are simply combining functional components, sort of like Lego peices to design our screens.
+
+- Hooks are JavaScript functions that provide certain capabilities to the component.
+
+- Examples of Hooks:
+  - `[foo, setFoo] = useState(value)`
+    - returning the use of a state variable, and the mutation/setter
+  - `useEffect(() => {}`
+    - Triggered after components drawn on screen, and used to update state objects.
+    - Good example, access to network data
+    - Can have many implementations each responsbile for doing something unique.
+  - `useCallback`
+    - A memory saving device, to create an instance of a function after a set of parameters has changed. Otherwise, a function is created on each render.
+  - `useReducer((rdcr, initialState) => {})`
+    - When you have a single complex state object with multiple properties that need to be updated. Works similar to React Redux
+  - `useContext()`
+    - A way of having global state that can be shared accross components
+  - `useRef`
+    - Hold a value in the current property, and doesn't trigger a re-render if the value changes. E.g holding a DOM element because it might be required to opt out of the standard state-driven React model to access the HTML directly.
+    - Exists as long as the component lives.
 
 ## What is the purpose of a Typescript Generic eg. `React.Component<GreetingProps>`
 
@@ -23,7 +51,6 @@ In OOP, an `interface` shows only the signature of a type as opposed to its inte
 
 An interface allows for a single structure across objects but to enable different implementations so it provides strict rules about what type the structure is
 
-## Practicals
+## Practicals with
 
-TODO. Create a class component - Get type safety by creating expect types for props and state. It has a constructor where there's a call to the base class constructor (`super(props)`) so it 'reacts' when props change.
-It uses the static lifecycle method `getDerivedStateFromProps` which returns a state object
+- Create 'Hello Component' in `class-components`
