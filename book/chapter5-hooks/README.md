@@ -28,9 +28,11 @@ https://github.com/PacktPublishing/Full-Stack-React-TypeScript-and-Node/tree/mas
   - `[foo, setFoo] = useState(value)`
     - returning the use of a state variable, and the mutation/setter
   - `useEffect(() => {}`
-    - Triggered after components drawn on screen, and used to update state objects.
-    - Good example, access to network data
+    - Triggered after drawing to screen finishes, and used to update state objects.
+    - Good example, access to network data and then update state.
     - Can have many implementations each responsbile for doing something unique.
+    - Similar to `componentDidMount`/`componentDidUpdate`
+    - pass an empty array as parameter to force it to only run once
   - `useCallback`
     - A memory saving device, to create an instance of a function after a set of parameters has changed. Otherwise, a function is created on each render.
   - `useReducer((rdcr, initialState) => {})`
